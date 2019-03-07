@@ -1,0 +1,6 @@
+{
+    "extends": "@princjef/tslint-config",
+    "rules": {
+        "no-implicit-dependencies": false
+    }
+}

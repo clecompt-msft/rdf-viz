@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "strict": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "forceConsistentCasingInFileNames": true,
+        "rootDir": "src",
+        "outDir": "app",
+        "baseUrl": "./",
+        "paths": {
+            "@rdfjs/formats-common": [
+                "./types/rdfjs__formats-common.d.ts"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "app"
+    ]
+}

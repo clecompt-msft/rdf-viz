@@ -1,0 +1,46 @@
+{
+    "namespace": {
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "style": {
+        "edge": {
+            "rdfs:subClassOf": {
+                "label": "",
+                "line-color": "yellowgreen",
+                "target-arrow-color": "yellowgreen"
+            },
+            "rdfs:subPropertyOf": {
+                "label": "",
+                "line-color": "salmon",
+                "target-arrow-color": "salmon"
+            },
+            "rdfs:domain": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "salmon yellowgreen",
+                "target-arrow-color": "yellowgreen"
+            },
+            "rdfs:range": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "salmon silver",
+                "target-arrow-color": "silver"
+            }
+        },
+        "node": {
+            "xsd:*": {
+                "node-presentation": "multiple"
+            }
+        },
+        "type": {
+            "rdfs:Class": {
+                "border-color": "yellowgreen"
+            },
+            "rdf:Property": {
+                "border-color": "salmon"
+            }
+        }
+    }
+}

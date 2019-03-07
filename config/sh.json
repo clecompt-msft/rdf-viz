@@ -1,0 +1,74 @@
+{
+    "@include": "rdfs",
+    "namespace": {
+        "sh": "http://www.w3.org/ns/shacl#"
+    },
+    "style": {
+        "edge": {
+            "sh:targetClass": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "gold yellowgreen",
+                "target-arrow-color": "yellowgreen"
+            },
+            "sh:property": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "gold violet",
+                "target-arrow-color": "violet"
+            },
+            "sh:path": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "violet salmon",
+                "target-arrow-color": "salmon"
+            },
+            "sh:node": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "violet gold",
+                "target-arrow-color": "gold"
+            },
+            "sh:class": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "violet yellowgreen",
+                "target-arrow-color": "yellowgreen"
+            },
+            "sh:datatype": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "violet silver",
+                "target-arrow-color": "silver"
+            },
+            "sh:nodeKind": {
+                "label": "",
+                "line-fill": "linear-gradient",
+                "line-gradient-stop-colors": "violet gainsboro",
+                "target-arrow-color": "gainsboro"
+            }
+        },
+        "node": {
+            "sh:BlankNode*": {
+                "node-presentation": "multiple",
+                "border-color": "gainsboro"
+            },
+            "sh:IRI*": {
+                "node-presentation": "multiple",
+                "border-color": "gainsboro"
+            },
+            "sh:Literal": {
+                "node-presentation": "multiple",
+                "border-color": "gainsboro"
+            }
+        },
+        "type": {
+            "sh:NodeShape": {
+                "border-color": "gold"
+            },
+            "sh:PropertyShape": {
+                "border-color": "violet"
+            }
+        }
+    }
+}

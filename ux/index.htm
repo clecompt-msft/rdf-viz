@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #cy {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      table {
+        font-family: sans-serif;
+        border-collapse: collapse;
+      }
+      td {
+        border-bottom: 1pt solid silver;
+      }
+      :last-child > td {
+        border-bottom: 0pt;
+      }
+
+      table.values td:nth-child(1) {
+        text-align: right;
+      }
+      table.values td:nth-child(2) {
+        font-size: 150%;
+        color: silver;
+        padding: 0ex 0.5ex;
+      }
+      table.values td:nth-child(3) {
+        text-align: left;
+      }
+    </style>
+    <link rel="stylesheet" href="../node_modules/tippy.js/themes/light-border.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script>
+      const cy = document.getElementById('cy');
+      require('../app/load.js')(cy).then(
+        result => {
+          const resize = () => {
+            cy.style.width = window.innerWidth + "px";
+            cy.style.height = window.innerHeight + "px";
+            result.resize();
+          };
+          resize();
+          window.addEventListener('resize', resize);
+        },
+        error => cy.innerText = error.stack
+      );
+    </script>
+  </body>
+</html>
