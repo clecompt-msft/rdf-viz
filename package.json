@@ -17,6 +17,7 @@
   },
   "author": "Carl LeCompte",
   "license": "MIT",
+  "repository": "github:clecompt-msft/rdf-viz",
   "dependencies": {
     "@rdfjs/data-model": "^1.1.1",
     "@rdfjs/formats-common": "^2.0.0",
