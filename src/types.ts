@@ -25,6 +25,14 @@ export namespace Style {
     }
 }
 
+export interface Option {
+    showTypeEdge?: Option.ShowTypeEdge;
+}
+
+export namespace Option {
+    export type ShowTypeEdge = 'never' | 'unstyled' | 'always';
+}
+
 export interface Config {
     // source glob | URI => source format
     source: { [path: string]: string };
@@ -37,4 +45,7 @@ export interface Config {
 
     // URI glob => style | reference | removal
     style: Style;
+
+    // Misc. options
+    option: Option;
 }

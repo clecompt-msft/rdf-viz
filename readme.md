@@ -51,6 +51,11 @@ Configuration files are JSON files which can include the following fields:
         styles:
         -   `node-presentation`: As per `node` (above), but acting on the edge
             and/or its target.
+-   `option`: Miscellaneous display options:
+    -   `showTypeEdge`: One of `never` (types are only displayed in the
+        tooltips; default), `unstyled` (type edges are displayed for types which
+        don't have an applied style), or `always` (type edges are always
+        displayed).
 
 ### Built-in configurations
 

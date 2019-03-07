@@ -94,10 +94,9 @@ class Graph {
     private classes(term: Term, key: keyof Style): string {
         return term.termType !== 'NamedNode'
             ? ''
-            : ' ' +
-                  this.styles(term.value, key)
-                      .map(className)
-                      .join(' ');
+            : this.styles(term.value, key)
+                  .map(style => ' ' + className(style))
+                  .join('');
     }
 
     // Add a node to the graph
@@ -190,8 +189,17 @@ class Graph {
             // Types are displayed as a tooltip and style, not in the graph
             case rdf.type:
                 source.data.types.push(quad.object);
-                source.classes += this.classes(quad.object, 'type');
-                return;
+                const classes = this.classes(quad.object, 'type');
+                source.classes += classes;
+                if (
+                    !this.config.option.showTypeEdge ||
+                    this.config.option.showTypeEdge === 'never' ||
+                    (this.config.option.showTypeEdge === 'unstyled' && classes)
+                ) {
+                    return;
+                }
+                rdfEdge = 'TypeEdge';
+                break;
 
             // List targets act like normal edges, but have special styles
             case rdf.first:
@@ -251,7 +259,7 @@ class Graph {
         const target = this.node(
             quad.object,
             quad.graph,
-            this.present('multiple', quad.predicate, 'edge') ||
+            (!rdfEdge && this.present('multiple', quad.predicate, 'edge')) ||
                 this.present('multiple', quad.object, 'node')
         );
         this.edge(quad.predicate, quad.graph, source, target, rdfEdge);

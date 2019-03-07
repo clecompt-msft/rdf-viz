@@ -26,6 +26,7 @@ async function load(container: HTMLElement) {
             node: {},
             edge: {},
         },
+        option: {},
     };
 
     // Acquire the configuration from args

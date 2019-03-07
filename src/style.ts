@@ -99,6 +99,13 @@ export default function(config: Config) {
                 height: 16,
             },
         },
+        {
+            selector: 'edge.TypeEdge',
+            style: {
+                label: '',
+                'line-style': 'dashed',
+            },
+        },
     ];
 
     // Combine base styles and configured styles
