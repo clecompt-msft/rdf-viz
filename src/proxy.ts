@@ -23,12 +23,22 @@ export default function(config: Config) {
         for (const proxy of proxies) {
             scope
                 .get(uri => uri.startsWith(proxy.path))
-                .reply(200, (uri: string) =>
-                    fs.readFileSync(
-                        path.join(proxy.file, uri.replace(proxy.path, '')),
-                        'utf8'
-                    )
-                );
+                .reply((uri: string) => {
+                    try {
+                        return [
+                            200,
+                            fs.readFileSync(
+                                path.join(
+                                    proxy.file,
+                                    uri.replace(proxy.path, '')
+                                ),
+                                'utf8'
+                            ),
+                        ];
+                    } catch {
+                        return [404, `Not Found`];
+                    }
+                });
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Stylesheet } from 'cytoscape';
+import { StylesheetStyle } from 'cytoscape';
 
 import { Config } from './types';
 import { CLASS } from './utility';
@@ -6,7 +6,7 @@ import { CLASS } from './utility';
 // Apply default and configured styles (that are being utilized)
 export default function(config: Config) {
     // Basic node and edge styles
-    const defaultStyles: Stylesheet[] = [
+    const defaultStyles = [
         {
             selector: 'edge',
             style: {
@@ -109,13 +109,76 @@ export default function(config: Config) {
     ];
 
     // Combine base styles and configured styles
-    const styles = defaultStyles.concat(termTypeStyles).concat(rdfStyles);
+    const styles = (defaultStyles as StylesheetStyle[])
+        .concat(termTypeStyles)
+        .concat(rdfStyles);
 
     for (const map of Object.values(config.style)) {
         for (const style of Object.values(map)) {
             if (style && typeof style === 'object' && style[CLASS]) {
                 styles.push({ style, selector: '.' + style[CLASS] });
             }
+        }
+    }
+
+    // Generate forward/reverse edge styles
+    let adjustment = 1;
+    for (const [index, sheet] of styles.slice().entries()) {
+        const forward = {};
+        const reverse = {};
+        for (const [key, value] of Object.entries(sheet.style) as string[][]) {
+            if (key.includes('source')) {
+                delete sheet.style[key];
+                forward[key] = value;
+                reverse[key.replace('source', 'target')] = value;
+            } else if (key.includes('target')) {
+                delete sheet.style[key];
+                forward[key] = value;
+                reverse[key.replace('target', 'source')] = value;
+            } else if (key.includes('distances') || key.includes('weights')) {
+                delete sheet.style[key];
+                forward[key] = value;
+                reverse[key] = value
+                    .split(' ')
+                    .reverse()
+                    .join(' ');
+            } else {
+                switch (key) {
+                    case 'line-gradient-stop-colors':
+                        delete sheet.style[key];
+                        forward[key] = value;
+                        reverse[key] = value
+                            .split(' ')
+                            .reverse()
+                            .join(' ');
+                        break;
+                    case 'line-gradient-stop-positions':
+                        delete sheet.style[key];
+                        forward[key] = value;
+                        reverse[key] = value
+                            .split(' ')
+                            .reverse()
+                            .map(percent => 100 - parseFloat(percent) + '%')
+                            .join(' ');
+                        break;
+                }
+            }
+        }
+
+        if (Object.keys(forward).length > 0) {
+            styles.splice(
+                index + adjustment,
+                0,
+                {
+                    selector: sheet.selector + '.forward',
+                    style: forward,
+                },
+                {
+                    selector: sheet.selector + '.reverse',
+                    style: reverse,
+                }
+            );
+            adjustment += 2;
         }
     }
 

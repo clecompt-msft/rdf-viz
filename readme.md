@@ -51,6 +51,8 @@ Configuration files are JSON files which can include the following fields:
         styles:
         -   `node-presentation`: As per `node` (above), but acting on the edge
             and/or its target.
+        -   `layout-direction`: Determines how the layout algorithm treats these
+            edges. Can be one of `forward` (default) or `reverse`.
 -   `option`: Miscellaneous display options:
     -   `showTypeEdge`: One of `never` (types are only displayed in the
         tooltips; default), `unstyled` (type edges are displayed for types which

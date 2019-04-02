@@ -90,6 +90,16 @@ class Graph {
         );
     }
 
+    // Determine if this edge is reverse layout via styles
+    private reverse(term: Term): boolean {
+        return (
+            term.termType === 'NamedNode' &&
+            this.styles<Style.Edge>(term.value, 'edge').some(
+                style => style['layout-direction'] === 'reverse'
+            )
+        );
+    }
+
     // Get the CSS style string for this term
     private classes(term: Term, key: keyof Style): string {
         return term.termType !== 'NamedNode'
@@ -128,21 +138,28 @@ class Graph {
         target: NodeDefinition,
         rdfClass?: string
     ): EdgeDefinition {
+        // If the edge is reversed, swap its endpoints
+        const reversed = this.reverse(term);
+        const src = reversed ? target : source;
+        const tgt = reversed ? source : target;
+
         const data = {
             id: termId(term, graph, true),
             text: termText(term, this.config),
-            source: source.data.id!,
-            target: target.data.id!,
+            source: src.data.id!,
+            target: tgt.data.id!,
             remove: this.present('none', term, 'edge'),
         };
         const edge = (this.edges[data.id] = this.edges[data.id] || {
             data,
-            classes: rdfClass || term.termType + this.classes(term, 'edge'),
+            classes:
+                (rdfClass || term.termType + this.classes(term, 'edge')) +
+                (reversed ? ' reverse' : ' forward'),
         });
 
         // Add the edge to its nodes
-        source.data.out.push(edge);
-        target.data.in.push(edge);
+        src.data.out.push(edge);
+        tgt.data.in.push(edge);
 
         return edge;
     }
@@ -307,7 +324,7 @@ class Graph {
                 const ins: EdgeDefinition[] = root.data.in.filter(
                     (edge: EdgeDefinition) => edgeIsPresent(edge, 'source')
                 );
-                const outs: EdgeDefinition[] = root.data.in.filter(
+                const outs: EdgeDefinition[] = root.data.out.filter(
                     (edge: EdgeDefinition) => edgeIsPresent(edge, 'target')
                 );
 

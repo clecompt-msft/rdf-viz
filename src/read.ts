@@ -5,7 +5,7 @@ import * as util from 'util';
 
 import { namedNode } from '@rdfjs/data-model';
 import { parsers } from '@rdfjs/formats-common';
-import * as getStream from 'get-stream';
+import getStream from 'get-stream';
 import * as glob from 'glob';
 import { Quad } from 'rdf-js';
 import * as request from 'request';

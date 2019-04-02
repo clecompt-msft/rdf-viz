@@ -9,6 +9,8 @@ export interface Style {
 export namespace Style {
     export type NodePresentation = 'single' | 'multiple' | 'none';
 
+    export type LayoutDirection = 'forward' | 'reverse';
+
     export interface Type extends Css.Node {}
 
     export interface Node extends Css.Node {
@@ -17,6 +19,7 @@ export namespace Style {
 
     export interface Edge extends Css.Edge {
         'node-presentation'?: NodePresentation;
+        'layout-direction'?: LayoutDirection;
     }
 
     export type Any = Edge | Type | Node;

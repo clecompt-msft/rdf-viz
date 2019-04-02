@@ -15,7 +15,8 @@
                 "label": "",
                 "line-fill": "linear-gradient",
                 "line-gradient-stop-colors": "gold violet",
-                "target-arrow-color": "violet"
+                "target-arrow-color": "violet",
+                "layout-direction": "reverse"
             },
             "sh:path": {
                 "label": "",
@@ -27,25 +28,29 @@
                 "label": "",
                 "line-fill": "linear-gradient",
                 "line-gradient-stop-colors": "violet gold",
-                "target-arrow-color": "gold"
+                "target-arrow-color": "gold",
+                "layout-direction": "reverse"
             },
             "sh:class": {
                 "label": "",
                 "line-fill": "linear-gradient",
                 "line-gradient-stop-colors": "violet yellowgreen",
-                "target-arrow-color": "yellowgreen"
+                "target-arrow-color": "yellowgreen",
+                "layout-direction": "reverse"
             },
             "sh:datatype": {
                 "label": "",
                 "line-fill": "linear-gradient",
                 "line-gradient-stop-colors": "violet silver",
-                "target-arrow-color": "silver"
+                "target-arrow-color": "silver",
+                "layout-direction": "reverse"
             },
             "sh:nodeKind": {
                 "label": "",
                 "line-fill": "linear-gradient",
                 "line-gradient-stop-colors": "violet gainsboro",
-                "target-arrow-color": "gainsboro"
+                "target-arrow-color": "gainsboro",
+                "layout-direction": "reverse"
             }
         },
         "node": {
